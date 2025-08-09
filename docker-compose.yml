@@ -33,3 +33,17 @@ services:
       - ./carte:/app
       - /app/node_modules
     command: npm run dev
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: develop
+      MYSQL_DATABASE: password
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+volumes:
+  db_data:
