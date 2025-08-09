@@ -13,7 +13,7 @@ app.notFound((c) => {
 });
 
 app.get("/", (c) => {
-	return c.text("carte server");
+	return c.text("calc server");
 });
 
 app.get("/health", healthCheck);
