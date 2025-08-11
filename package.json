@@ -3,16 +3,30 @@
   "version": "1.0.0",
   "description": "歯科向けカルテ＆レセコン Neo Dental Carte & Recept-Computer",
   "main": "index.js",
+  "private": true,
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "up": "docker compose up -d --build",
+    "down": "docker compose down",
+    "restart": "docker compose restart"
   },
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "packages/db",
-    "packages/database"
-  ]
+    "packages/database",
+    "apps/api",
+    "apps/carte",
+    "apps/calc"
+  ],
+  "dependencies": {
+    "@hono/node-server": "^1.18.1",
+    "hono": "^4.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  }
 }

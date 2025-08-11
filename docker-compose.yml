@@ -1,49 +1,52 @@
-version: '3.8'
-
 services:
   api:
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+    image: node:22-alpine
+    working_dir: /workspace
     ports:
-      - "3000:3000"
+      - "8080:8080"
     volumes:
-      - ./api:/app
-      - /app/node_modules
-    command: npm run dev
+      - ./:/workspace
+      - root_node_modules:/workspace/node_modules
+    command: sh -c "cd /workspace && npm i && npm run -w apps/api dev"
+    depends_on:
+      - db
 
   calc:
-    build:
-      context: ./calc
-      dockerfile: Dockerfile
+    image: node:22-alpine
+    working_dir: /workspace
     ports:
-      - "3001:3001"
+      - "8081:8081"
     volumes:
-      - ./calc:/app
-      - /app/node_modules
-    command: npm run dev
+      - ./:/workspace
+      - root_node_modules:/workspace/node_modules
+    command: sh -c "cd /workspace && npm i && npm run -w apps/calc dev"
+    depends_on:
+      - db
 
   carte:
-    build:
-      context: ./carte
-      dockerfile: Dockerfile
+    image: node:22-alpine
+    working_dir: /workspace
     ports:
-      - "3002:3002"
+      - "8082:8082"
     volumes:
-      - ./carte:/app
-      - /app/node_modules
-    command: npm run dev
+      - ./:/workspace
+      - root_node_modules:/workspace/node_modules
+    command: sh -c "cd /workspace && npm i && npm run -w apps/carte dev"
+    depends_on:
+      - db
 
   db:
-    image: mysql:8.0
+    image: postgres
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: develop
-      MYSQL_DATABASE: password
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: dev
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
     restart: always
 
 volumes:
   db_data:
+  root_node_modules:
