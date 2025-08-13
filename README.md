@@ -2,4 +2,4 @@
 歯科向けカルテ＆レセコン Neo Dental Carte & Recept-Computer
 
 ## For Developers
-See below `docs/`.
+See the documentation in `docs/` for more details.
