@@ -16,9 +16,9 @@
   "license": "ISC",
   "workspaces": [
     "packages/database",
+    "packages/calc",
     "apps/api",
-    "apps/carte",
-    "apps/calc"
+    "apps/carte"
   ],
   "dependencies": {
     "@hono/node-server": "^1.18.1",
