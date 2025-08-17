@@ -11,18 +11,6 @@ services:
     depends_on:
       - db
 
-  carte:
-    image: node:22-alpine
-    working_dir: /workspace
-    ports:
-      - "8082:8082"
-    volumes:
-      - ./:/workspace
-      - root_node_modules:/workspace/node_modules
-    command: sh -c "cd /workspace && npm i && npm run -w apps/carte dev"
-    depends_on:
-      - db
-
   db:
     image: postgres
     ports:
